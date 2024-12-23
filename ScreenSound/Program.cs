@@ -1,5 +1,23 @@
-﻿using ScreenSound.Menus;
+﻿using ScreenSound.Banco;
+using ScreenSound.Menus;
 using ScreenSound.Modelos;
+
+try
+{
+    // Quando declaramos uma variável local como using, ela é descartada no
+    // final do escopo em que ela foi declarada. Com isso conseguimos aplicar
+    // uma boa prática e gerenciar melhor os recursos que estão sendo
+    // utilizados e mantê-los somente quando estiverem sendo utilizados
+    using var connection = new Connection().ObterConexao();
+    connection.Open();
+    Console.WriteLine(connection.State);
+
+} catch(Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+return;
 
 Artista ira = new Artista("Ira!", "Banda Ira!");
 Artista beatles = new("The Beatles", "Banda The Beatles");
