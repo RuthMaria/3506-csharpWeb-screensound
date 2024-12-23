@@ -4,13 +4,14 @@ using ScreenSound.Modelos;
 
 try
 {
-    // Quando declaramos uma variável local como using, ela é descartada no
-    // final do escopo em que ela foi declarada. Com isso conseguimos aplicar
-    // uma boa prática e gerenciar melhor os recursos que estão sendo
-    // utilizados e mantê-los somente quando estiverem sendo utilizados
-    using var connection = new Connection().ObterConexao();
-    connection.Open();
-    Console.WriteLine(connection.State);
+    
+    var connection = new Connection();
+    var listaArtistas = connection.Listar();
+
+    foreach (var artista in listaArtistas)
+    {
+        Console.WriteLine(artista);
+    }
 
 } catch(Exception ex)
 {
