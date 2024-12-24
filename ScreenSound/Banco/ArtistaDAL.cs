@@ -22,21 +22,23 @@ namespace ScreenSound.Banco;
 
 internal class ArtistaDAL
 {
+    private readonly ScreenSoundContext context;
 
+    public ArtistaDAL(ScreenSoundContext context)
+    {
+        this.context = context;
+    }
 
     // Quando declaramos uma variável local como using, ela é descartada no
     // final do escopo em que ela foi declarada. Com isso conseguimos aplicar
     // uma boa prática e gerenciar melhor os recursos que estão sendo
     // utilizados e mantê-los somente quando estiverem sendo utilizados
-
     public IEnumerable<Artista> Listar()
     {
-        using var context = new ScreenSoundContext();
-
         return context.Artistas.ToList();
     }
 
-    //public IEnumerable<Artista> ListarComAdoNet()
+    //public IEnumerable<Artista> ListarUsandoAdoNet()
     //{
     //    var lista = new List<Artista>();
     //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
@@ -60,7 +62,13 @@ internal class ArtistaDAL
     //    return lista;
     //}
 
-    //public void Adicionar(Artista artista)
+    public void Adicionar(Artista artista)
+    {
+        context.Artistas.Add(artista);
+        context.SaveChanges(); // salva as alterações feita no banco
+    }
+
+    //public void AdicionarUsandoAdoNet(Artista artista)
     //{
     //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
     //    connection.Open();
@@ -76,7 +84,14 @@ internal class ArtistaDAL
     //    Console.WriteLine($"Linhas afetadas: {retorno}");
     //}
 
-    //public void Atualizar(Artista artista)
+    public void Atualizar(Artista artista)
+    {
+        context.Artistas.Update(artista);
+        context.SaveChanges();
+
+    }
+
+    //public void AtualizarUsandoAdoNet(Artista artista)
     //{
     //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
     //    connection.Open();
