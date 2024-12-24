@@ -28,73 +28,81 @@ internal class ArtistaDAL
     // final do escopo em que ela foi declarada. Com isso conseguimos aplicar
     // uma boa prática e gerenciar melhor os recursos que estão sendo
     // utilizados e mantê-los somente quando estiverem sendo utilizados
+
     public IEnumerable<Artista> Listar()
     {
-        var lista = new List<Artista>();
-        using var connection = new Connection().ObterConexao();
-        connection.Open();
+        using var context = new ScreenSoundContext();
 
-        string sql = "SELECT * FROM Artistas";
-        SqlCommand command = new SqlCommand(sql, connection); //  representa a instrução que será executada no banco de dados
-        using SqlDataReader dataReader = command.ExecuteReader(); // responsável por ler as informações do banco
-
-        while (dataReader.Read())
-        {
-            string nomeArtista = Convert.ToString(dataReader["Nome"]);
-            string bioArtista = Convert.ToString(dataReader["Bio"]);
-            int idArtista = Convert.ToInt32(dataReader["Id"]);
-
-            Artista artista = new(nomeArtista, bioArtista) { Id = idArtista };
-
-            lista.Add(artista);
-        }
-
-        return lista;
+        return context.Artistas.ToList();
     }
 
-    public void Adicionar(Artista artista)
-    {
-        using var connection = new Connection().ObterConexao();
-        connection.Open();
+    //public IEnumerable<Artista> ListarComAdoNet()
+    //{
+    //    var lista = new List<Artista>();
+    //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
+    //    connection.Open();
 
-        string sql = "INSERT INTO Artistas (Nome, FotoPerfil, Bio) VALUES (@nome, @perfilPadrao, @bio)";
-        SqlCommand command = new SqlCommand(sql, connection);
+    //    string sql = "SELECT * FROM Artistas";
+    //    SqlCommand command = new SqlCommand(sql, connection); //  representa a instrução que será executada no banco de dados
+    //    using SqlDataReader dataReader = command.ExecuteReader(); // responsável por ler as informações do banco
 
-        command.Parameters.AddWithValue("@nome", artista.Nome);
-        command.Parameters.AddWithValue("@perfilPadrao", artista.FotoPerfil);
-        command.Parameters.AddWithValue("@bio", artista.Bio);
+    //    while (dataReader.Read())
+    //    {
+    //        string nomeArtista = Convert.ToString(dataReader["Nome"]);
+    //        string bioArtista = Convert.ToString(dataReader["Bio"]);
+    //        int idArtista = Convert.ToInt32(dataReader["Id"]);
 
-        int retorno = command.ExecuteNonQuery();
-        Console.WriteLine($"Linhas afetadas: {retorno}");
-    }
+    //        Artista artista = new(nomeArtista, bioArtista) { Id = idArtista };
 
-    public void Atualizar(Artista artista)
-    {
-        using var connection = new Connection().ObterConexao();
-        connection.Open();
+    //        lista.Add(artista);
+    //    }
 
-        string sql = "UPDATE Artistas SET Nome = @nome, Bio = @bio WHERE Id = @id";
-        SqlCommand command = new SqlCommand(sql, connection);
+    //    return lista;
+    //}
 
-        command.Parameters.AddWithValue("@nome", artista.Nome);
-        command.Parameters.AddWithValue("@bio", artista.Bio);
-        command.Parameters.AddWithValue("@id", artista.Id);
+    //public void Adicionar(Artista artista)
+    //{
+    //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
+    //    connection.Open();
 
-        int retorno = command.ExecuteNonQuery();
-        Console.WriteLine($"Linhas afetadas: {retorno}");
-    }
+    //    string sql = "INSERT INTO Artistas (Nome, FotoPerfil, Bio) VALUES (@nome, @perfilPadrao, @bio)";
+    //    SqlCommand command = new SqlCommand(sql, connection);
 
-    public void Deletar(Artista artista)
-    {
-        using var connection = new Connection().ObterConexao();
-        connection.Open();
+    //    command.Parameters.AddWithValue("@nome", artista.Nome);
+    //    command.Parameters.AddWithValue("@perfilPadrao", artista.FotoPerfil);
+    //    command.Parameters.AddWithValue("@bio", artista.Bio);
 
-        string sql = "DELETE FROM Artistas WHERE Id = @id";
-        SqlCommand command = new SqlCommand(sql, connection);
+    //    int retorno = command.ExecuteNonQuery();
+    //    Console.WriteLine($"Linhas afetadas: {retorno}");
+    //}
 
-        command.Parameters.AddWithValue("@id", artista.Id);
+    //public void Atualizar(Artista artista)
+    //{
+    //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
+    //    connection.Open();
 
-        int retorno = command.ExecuteNonQuery();
-        Console.WriteLine($"Linhas afetadas: {retorno}");
-    }
+    //    string sql = "UPDATE Artistas SET Nome = @nome, Bio = @bio WHERE Id = @id";
+    //    SqlCommand command = new SqlCommand(sql, connection);
+
+    //    command.Parameters.AddWithValue("@nome", artista.Nome);
+    //    command.Parameters.AddWithValue("@bio", artista.Bio);
+    //    command.Parameters.AddWithValue("@id", artista.Id);
+
+    //    int retorno = command.ExecuteNonQuery();
+    //    Console.WriteLine($"Linhas afetadas: {retorno}");
+    //}
+
+    //public void Deletar(Artista artista)
+    //{
+    //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
+    //    connection.Open();
+
+    //    string sql = "DELETE FROM Artistas WHERE Id = @id";
+    //    SqlCommand command = new SqlCommand(sql, connection);
+
+    //    command.Parameters.AddWithValue("@id", artista.Id);
+
+    //    int retorno = command.ExecuteNonQuery();
+    //    Console.WriteLine($"Linhas afetadas: {retorno}");
+    //}
 }
