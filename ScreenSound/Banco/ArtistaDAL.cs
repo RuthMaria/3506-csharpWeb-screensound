@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using ScreenSound.Modelos;
 using System;
 using System.Collections.Generic;
@@ -107,7 +108,13 @@ internal class ArtistaDAL
     //    Console.WriteLine($"Linhas afetadas: {retorno}");
     //}
 
-    //public void Deletar(Artista artista)
+    public void Deletar(Artista artista)
+    {
+        context.Artistas.Remove(artista);
+        context.SaveChanges();
+    }
+
+    //public void DeletarUsandoAdoNet(Artista artista)
     //{
     //    using var connection = new ScreenSoundContext().ObterConexaoUsandoAdoNet();
     //    connection.Open();

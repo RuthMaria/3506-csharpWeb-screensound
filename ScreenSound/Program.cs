@@ -4,9 +4,16 @@ using ScreenSound.Modelos;
 
 try
 {
-    var artistaDAL = new ArtistaDAL();
+    var context = new ScreenSoundContext();
+    var artistaDAL = new ArtistaDAL(context);
+
+
+    var novoArtista = new Artista("Gilberto Gil", "Gilberto Passos Gil Moreira é um cantor, compositor, multi-instrumentista.") { Id = 2002 };
+    artistaDAL.Adicionar(novoArtista);
+    artistaDAL.Atualizar(novoArtista);
+    artistaDAL.Deletar(novoArtista);
+
     var listaArtistas = artistaDAL.Listar();
- //   artistaDAL.Adicionar(new Artista("Foo Fighters", "Foo Fighters é uma banda de rock alternativo americana formada por Dave Grohl em 1995."));
 
     foreach (var artista in listaArtistas)
     {
@@ -16,6 +23,7 @@ try
 } catch(Exception ex)
 {
     Console.WriteLine(ex.Message);
+    Console.WriteLine(ex.StackTrace);
 }
 
 return;
