@@ -9,10 +9,11 @@ try
 
 
     var novoArtista = new Artista("Gilberto Gil", "Gilberto Passos Gil Moreira é um cantor, compositor, multi-instrumentista.") { Id = 2002 };
-    artistaDAL.Adicionar(novoArtista);
-    artistaDAL.Atualizar(novoArtista);
-    artistaDAL.Deletar(novoArtista);
+    // artistaDAL.Adicionar(novoArtista);
+    // artistaDAL.Atualizar(novoArtista);
+    //artistaDAL.Deletar(novoArtista);
 
+    Console.WriteLine(artistaDAL.RecuperarPeloNome("Foo Fighters"));
     var listaArtistas = artistaDAL.Listar();
 
     foreach (var artista in listaArtistas)
