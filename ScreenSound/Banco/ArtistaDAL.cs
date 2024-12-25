@@ -1,11 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ScreenSound.Modelos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /*
  
@@ -128,9 +123,8 @@ internal class ArtistaDAL
     //    Console.WriteLine($"Linhas afetadas: {retorno}");
     //}
 
-   public Artista? RecuperarPeloNome(string nome)
-   {
-      return context.Artistas.FirstOrDefault(a => a.Nome.Equals(nome));
-   }
-
+    public Artista? RecuperarPeloNome(string nome)
+    {
+       return context.Artistas.FirstOrDefault(a => a.Nome.Equals(nome));
+    }
 }
