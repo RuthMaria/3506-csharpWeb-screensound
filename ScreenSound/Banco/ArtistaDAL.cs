@@ -16,7 +16,7 @@ fonte de dados específica
  */
 namespace ScreenSound.Banco;
 
-internal class ArtistaDAL
+internal abstract class ArtistaDAL: DAL<Artista>
 {
     private readonly ScreenSoundContext context;
 
@@ -29,7 +29,7 @@ internal class ArtistaDAL
     // final do escopo em que ela foi declarada. Com isso conseguimos aplicar
     // uma boa prática e gerenciar melhor os recursos que estão sendo
     // utilizados e mantê-los somente quando estiverem sendo utilizados
-    public IEnumerable<Artista> Listar()
+    public override IEnumerable<Artista> Listar()
     {
         return context.Artistas.ToList();
     }
@@ -58,7 +58,7 @@ internal class ArtistaDAL
     //    return lista;
     //}
 
-    public void Adicionar(Artista artista)
+    public override void Adicionar(Artista artista)
     {
         context.Artistas.Add(artista);
         context.SaveChanges(); // salva as alterações feita no banco
@@ -80,7 +80,7 @@ internal class ArtistaDAL
     //    Console.WriteLine($"Linhas afetadas: {retorno}");
     //}
 
-    public void Atualizar(Artista artista)
+    public override void Atualizar(Artista artista)
     {
         context.Artistas.Update(artista);
         context.SaveChanges();
@@ -103,7 +103,7 @@ internal class ArtistaDAL
     //    Console.WriteLine($"Linhas afetadas: {retorno}");
     //}
 
-    public void Deletar(Artista artista)
+    public override void Deletar(Artista artista)
     {
         context.Artistas.Remove(artista);
         context.SaveChanges();
