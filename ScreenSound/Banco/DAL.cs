@@ -25,10 +25,46 @@ comportamento semelhante. Interface não possui métodos concretos.
 
  */
 
-internal abstract class DAL<T>
+/*
+ A parte 'where T : class' define uma restrição genérica. 
+ Isso significa que o tipo T passado para a classe DAL<T> deve ser uma 
+ classe (não pode ser um tipo primitivo como int, bool, etc.).
+ Essa restrição é importante porque o código trabalha com entidades do 
+ Entity Framework, que são classes.
+ */
+internal abstract class DAL<T> where T : class
 {
-    public abstract IEnumerable<T> Listar();
-    public abstract void Adicionar(T objeto);
-    public abstract void Atualizar(T objeto);
-    public abstract void Deletar(T objeto);
+    protected readonly ScreenSoundContext context;
+
+    protected DAL(ScreenSoundContext context)
+    {
+        this.context = context;
+    }
+
+    /*
+       o Set identifica qual tipo estamos utilizando (artista ou música, por exemplo).
+       Em seguida, é feito o acesso ao conjunto de entidades do tipo T.
+    */
+    public IEnumerable<T> Listar()
+    {
+       return context.Set<T>().ToList(); 
+    }
+
+    public void Adicionar(T objeto)
+    {
+        context.Set<T>().Add(objeto);
+        context.SaveChanges(); // salva as alterações feita no banco
+    }
+
+    public void Atualizar(T objeto)
+    {
+        context.Set<T>().Update(objeto);
+        context.SaveChanges();
+    }
+
+    public void Deletar(T objeto)
+    {
+        context.Set<T>().Remove(objeto);
+        context.SaveChanges();
+    }
 }
