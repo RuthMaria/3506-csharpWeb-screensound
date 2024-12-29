@@ -6,9 +6,10 @@ namespace ScreenSound.Banco;
 
 /*
  DbContext representa a sessão com o banco de dados. 
+
  Cada Objeto DbSet<Artista> representa um tipo de entidade no banco de 
  dados, ou seja, uma tabela.
- 
+
  */
 internal class ScreenSoundContext: DbContext
 {
@@ -20,13 +21,6 @@ internal class ScreenSoundContext: DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies();
+        optionsBuilder.UseSqlServer(connectionString).UseLazyLoadingProxies(); // UseLazyLoadingProxies carrega os dados de forma lenta
     }
-
-    /*
-     public SqlConnection ObterConexaoUsandoAdoNet()
-     {
-        return new SqlConnection(connectionString);
-     }
-    */
 }

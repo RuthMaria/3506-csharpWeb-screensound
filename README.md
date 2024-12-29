@@ -1,8 +1,10 @@
 <p align="center">
   <a href="#about">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;  
   <a href="#technologies">Tecnologias usadas</a>&nbsp;&nbsp;&nbsp;|&nbsp;
-  <a href="#rodar">Como rodar o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#license">Licença</a>
+    <a href="#preview">Prévia</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#rodar">Como rodar o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#license">Licença</a>
+
 </p>
 
 <p align="center">
@@ -17,9 +19,15 @@
 
 ## :books: Sobre
 
-Este projeto abordou a criação de um projeto do tipo biblioteca de classe. Explorou a utilização de bibliotecas externas com o NuGet para criar um arquivo em formato JSON e também abordou a visibilidade internal e protected internal.
+O Screen Sound é uma aplicação que permite:
 
-Em seguida, foi criada uma DLL e publicada o pacote no nuget.org, afim de disponibilizar uma nova funcionalidade para a comunidade .NET.
+- Registar artistas
+- Registrar musicas de um artista
+- Listar artistas
+- Listar músicas de um artista
+- Listar músicas por ano de lançamento
+
+Onde foi trabalhado: comunicação com SQLServer, bibliotecas ORM, aplicação de Generic e criação e utilização de migrations.
 
 <a id="technologies"></a><br>
 
@@ -29,6 +37,12 @@ Em seguida, foi criada uma DLL e publicada o pacote no nuget.org, afim de dispon
 - SQL Server
 - Entity Framework
 
+<a id="preview"></a><br>
+
+## :tv: Prévia
+
+<img src="./tela.png">
+
 <a id="rodar"></a><br>
 
 ## 🚀 Como rodar o projeto
@@ -36,7 +50,7 @@ Em seguida, foi criada uma DLL e publicada o pacote no nuget.org, afim de dispon
 - Clonar este repositório
 
 ```
-git clone https://github.com/RuthMaria/bibliotecas.git
+git clone https://github.com/RuthMaria/3506-csharpWeb-screensound.git
 ```
 
 - Rodar o projeto no Visual Studio
