@@ -1,16 +1,17 @@
 ﻿namespace ScreenSound.Banco;
+using ScreenSound.Modelos;
 
 /*
  
 Diferença entre DAL (Data Access Object) e DAO (Data Access Layer)
-O DAL é a camada de acesso a dados que promove a abstração desses dados e vai 
+é que o DAL é a camada de acesso a dados que promove a abstração desses dados e vai 
 emitir todos os comandos de SELECT, INSERT, UPDATE E DELETE de maneira 
 separada da lógica das classes do projeto e independente da fonte de dados, 
 enquanto o DAO é um objeto do banco de dados que representa um banco aberto.
 
 Basicamente, o DAL representa a estrutura de acesso aos dados, independente do
 tipo de banco utilizado, e o DAO é o objeto que representa o acesso a uma 
-fonte de dados específica
+fonte de dados específica.
  
 ---------------------------------------------------------------------
 
@@ -50,6 +51,8 @@ internal class DAL<T> where T : class
     /*
      o Set identifica qual tipo estamos utilizando (artista ou música, por exemplo).
      Em seguida, é feito o acesso ao conjunto de entidades do tipo T.
+
+     Ele é equivalente ao 'context.Artistas.ToList();' da forma não genérica 
     */
     public IEnumerable<T> Listar()
     {
@@ -84,5 +87,10 @@ internal class DAL<T> where T : class
     public T? RecuperarPor(Func<T, bool> condicao)
     {
         return context.Set<T>().FirstOrDefault(condicao);
+    }
+
+    public IEnumerable<T> ListarPor(Func<T, bool> condicao)
+    {
+        return context.Set<T>().Where(condicao);
     }
 }
